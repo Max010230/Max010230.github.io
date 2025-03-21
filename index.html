@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星星 | AI 爱好者 Java程序猿</title>
+    <!-- 网站图标 -->
+    <link rel="icon" type="image/x-icon" href="bitbug_favicon.ico">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-100">
+    <!-- 头部背景 -->
+    <div class="relative h-[50vh] bg-cover bg-center" id="headerBackground">
+        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+        <div class="absolute bottom-0 left-0 right-0 p-8 text-white">
+            <h1 class="text-4xl font-bold mb-2">星星</h1>
+            <p class="text-xl">AI 爱好者 Java老年程序猿</p>
+        </div>
+    </div>
+
+    <!-- 主要内容 -->
+    <div class="container mx-auto px-4 py-8">
+        <!-- 个人信息卡片网格 -->
+        <div class="grid md:grid-cols-2 gap-6 mb-8">
+            <!-- 关于我卡片 -->
+            <div class="bg-white rounded-lg shadow-lg p-6 transform hover:scale-105 transition-transform duration-300">
+                <div class="flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mx-auto mb-4">
+                    <i class="fas fa-user text-2xl text-blue-600"></i>
+                </div>
+                <h2 class="text-2xl font-bold mb-4 text-center">关于我</h2>
+                <p class="text-gray-700 text-center">
+                    十年程序员，热爱编程，AI编程拥抱着
+                </p>
+            </div>
+
+            <!-- 社交链接卡片 -->
+            <div class="bg-white rounded-lg shadow-lg p-6 transform hover:scale-105 transition-transform duration-300">
+                <div class="flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mx-auto mb-4">
+                    <i class="fas fa-link text-2xl text-green-600"></i>
+                </div>
+                <h2 class="text-2xl font-bold mb-4 text-center">社交链接</h2>
+                <div class="space-y-4">
+                    <a href="https://github.com/Max010230" 
+                       class="flex items-center justify-center p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors">
+                        <i class="fab fa-github text-2xl mr-2"></i>
+                        <span>GitHub</span>
+                    </a>
+                    <div class="flex items-center justify-center p-3 rounded-lg bg-gray-50">
+                        <i class="fab fa-weixin text-2xl mr-2 text-green-500"></i>
+                        <span>微信: wxid_cnlpb0h8sf9x22</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 作品展示 -->
+        <section class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-2xl font-bold mb-4 flex items-center">
+                <i class="fas fa-code mr-2"></i>作品展示
+            </h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- 作品卡片 1 -->
+                <div class="border rounded-lg p-4 hover:shadow-lg transition">
+                    <div class="w-full h-48 bg-cover bg-center rounded mb-4" id="projectImage1"></div>
+                    <h3 class="font-bold mb-2">支付宝微信支付集成工具</h3>
+                    <p class="text-gray-600 mb-4">Spring Boot 支付集成启动器</p>
+                    <a href="https://github.com/Max010230/pay-spring-boot-starter" class="text-blue-600 hover:text-blue-800">
+                        <i class="fas fa-external-link-alt mr-1"></i>查看项目
+                    </a>
+                </div>
+                <!-- 作品卡片 2 -->
+                <div class="border rounded-lg p-4 hover:shadow-lg transition">
+                    <div class="w-full h-48 bg-cover bg-center rounded mb-4" id="projectImage2"></div>
+                    <h3 class="font-bold mb-2">EMQ集成工具</h3>
+                    <p class="text-gray-600 mb-4">EMQ Spring Boot 集成启动器</p>
+                    <a href="https://github.com/Max010230/emq-spring-boot-starter" class="text-blue-600 hover:text-blue-800">
+                        <i class="fas fa-external-link-alt mr-1"></i>查看项目
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-800 text-white py-6 mt-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>© 2024 星星. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        async function getBingDailyImage() {
+            try {
+                const proxyUrl = 'https://api.allorigins.win/raw?url=';
+                const bingUrl = 'https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=3';
+                const response = await fetch(proxyUrl + encodeURIComponent(bingUrl));
+                const data = await response.json();
+                
+                // 设置头部背景
+                const headerImage = `https://www.bing.com${data.images[0].url}`;
+                document.getElementById('headerBackground').style.backgroundImage = `url('${headerImage}')`;
+                
+                // 设置项目图片
+                const projectImage1 = `https://www.bing.com${data.images[1].url}`;
+                const projectImage2 = `https://www.bing.com${data.images[2].url}`;
+                document.getElementById('projectImage1').style.backgroundImage = `url('${projectImage1}')`;
+                document.getElementById('projectImage2').style.backgroundImage = `url('${projectImage2}')`;
+            } catch (error) {
+                console.error('获取必应图片失败:', error);
+                // 使用备用图片
+                const fallbackImage = 'https://picsum.photos/1920/1080';
+                document.getElementById('headerBackground').style.backgroundImage = `url('${fallbackImage}')`;
+                document.getElementById('projectImage1').style.backgroundImage = `url('${fallbackImage}?random=1')`;
+                document.getElementById('projectImage2').style.backgroundImage = `url('${fallbackImage}?random=2')`;
+            }
+        }
+
+        // 页面加载时获取图片
+        window.addEventListener('load', getBingDailyImage);
+    </script>
+</body>
+</html> 
